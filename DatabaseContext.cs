@@ -45,5 +45,6 @@ namespace storeproject
 
     }
     public DbSet<Inventory> Inventories { get; set; }
+    public DbSet<Location> Locations { get; set; }
   }
 }

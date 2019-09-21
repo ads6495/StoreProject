@@ -1,5 +1,6 @@
 using System;
 
+
 namespace StoreProject.models
 {
   public class Inventory
@@ -11,17 +12,10 @@ namespace StoreProject.models
     public int NumberInStock { get; set; }
     public int Price { get; set; }
     public DateTime DateOrdered { get; set; }
+
+    public int LocationId { get; set; }
+
+    public Location Location { get; set; }
   }
 }
 
-
-
-/* 
-Id
- SKU
- Name
- Short description
- NumberInStock
- Price
- DateOrdered 
- */

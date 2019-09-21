@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using storeproject;
@@ -9,9 +10,10 @@ using storeproject;
 namespace storeproject.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20190921163107_AddedItemTable")]
+    partial class AddedItemTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,10 +30,6 @@ namespace storeproject.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<int>("InventoryId");
-
-                    b.Property<int?>("LocationId");
-
                     b.Property<string>("Name");
 
                     b.Property<int>("NumberInStock");
@@ -41,10 +39,6 @@ namespace storeproject.Migrations
                     b.Property<int>("SKU");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("InventoryId");
-
-                    b.HasIndex("LocationId");
 
                     b.ToTable("Inventories");
                 });
@@ -63,18 +57,6 @@ namespace storeproject.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Locations");
-                });
-
-            modelBuilder.Entity("StoreProject.models.Inventory", b =>
-                {
-                    b.HasOne("StoreProject.models.Inventory", "Invent")
-                        .WithMany()
-                        .HasForeignKey("InventoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("StoreProject.models.Location")
-                        .WithMany("Inventories")
-                        .HasForeignKey("LocationId");
                 });
 #pragma warning restore 612, 618
         }
