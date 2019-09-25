@@ -13,7 +13,7 @@ namespace StoreProject.models
     public int Price { get; set; }
     public DateTime DateOrdered { get; set; }
 
-    public int LocationId { get; set; }
+    public int? LocationId { get; set; }
 
     public Location Location { get; set; }
   }

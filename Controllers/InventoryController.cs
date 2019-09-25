@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Internal;
 using storeproject;
 using StoreProject.models;
 
@@ -18,10 +19,17 @@ namespace StoreProject.Controllers
     }
 
     [HttpGet]
-    public ActionResult<IEnumerable<Inventory>> GetAllInventory()
+    public ActionResult<IEnumerable<object>> GetAllInventory()
     {
-      var invs = context.Inventories.OrderByDescending(inv => inv.SKU);
+      var invs = context.Inventories.Join(context.Locations, i => i.LocationId, l => l.Id, (i, l) => new
+      {
+        ItemName = i.Name,
+        ItemId = i.Id,
+        LocationAddress = l.Address,
+        LocationId = l.Id
 
+      }
+      );
       return invs.ToList();
     }
 
